@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aravind — LinkedIn Growth Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#faf9f5;
+    --alt:#f4f4f0;
+    --ink:#1b1c1a;
+    --g700:#444748;
+    --g500:#747878;
+    --g300:#c4c7c7;
+    --blue:#005eb5;
+    --blue-tint:#d6e3ff;
+    --blue-deep:#001b3d;
+    --black:#000000;
+    --dark-blue-accent:#5c9efe;
+    --dark-grey:#858383;
+    --card-line:rgba(0,0,0,.05);
+    --radius-lg:24px;
+    --radius-md:16px;
+    --radius-sm:12px;
+    --font-head:'Manrope',sans-serif;
+    --font-body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:96px;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{text-decoration:none; color:inherit;}
+  button{font-family:inherit; cursor:pointer; border:none;}
+  ul{list-style:none; margin:0; padding:0;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 48px;}
+  @media (max-width:900px){ .wrap{padding:0 24px;} }
+  @media (max-width:560px){ .wrap{padding:0 20px;} }
+
+  .eyebrow{
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:1.1px;
+    text-transform:uppercase;
+    color:var(--blue);
+    margin:0 0 8px;
+  }
+  .eyebrow--dark{color:var(--dark-blue-accent);}
+  h1,h2,h3{font-family:var(--font-head); color:var(--ink); margin:0; line-height:1.15;}
+  h2{font-size:44px; font-weight:700; letter-spacing:-1.1px; line-height:1.18;}
+  h3{font-size:18px; font-weight:700; letter-spacing:-.18px;}
+  p{margin:0;}
+  .section-lede{font-size:16px; color:var(--g700); line-height:1.6; letter-spacing:-.08px;}
+  .center{text-align:center;}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    border-radius:9999px; font-weight:600; font-size:13px; letter-spacing:.52px;
+    padding:14px 28px; white-space:nowrap; transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--blue); color:#fff; box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);}
+  .btn-ghost{background:#fff; color:var(--ink);}
+  .btn-dark{background:var(--black); color:#fff;}
+  .btn-white{background:#fff; color:var(--ink); box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);}
+  .btn-accent{background:var(--dark-blue-accent); color:#00356b; font-weight:700; box-shadow:0 0 12px rgba(92,158,254,.35);}
+  .btn-sm{padding:8px 20px; font-size:13px;}
+
+  /* icon helpers */
+  .icon{stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;}
+  .icon-box{
+    width:48px; height:48px; border-radius:12px; background:#efeeea;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .badge-pill{
+    display:inline-flex; align-items:center; gap:8px; padding:4px 12px; border-radius:9999px;
+    background:rgba(233,232,228,.8); font-size:11px; font-weight:600; letter-spacing:.55px;
+    text-transform:uppercase; color:var(--g700);
+  }
+  .badge-pill--dark{background:rgba(227,226,223,.1); color:var(--dark-blue-accent);}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--blue); flex-shrink:0;}
+  .dot--accent{background:var(--dark-blue-accent);}
+
+  /* ===== HEADER ===== */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(250,249,245,.85); backdrop-filter:blur(12px);
+    box-shadow:0 1px 8px rgba(0,0,0,.04);
+  }
+  .header-inner{
+    max-width:1240px; margin:0 auto; padding:0 48px;
+    display:flex; align-items:center; justify-content:space-between; height:80px;
+  }
+  .brand{display:flex; align-items:center; gap:8px;}
+  .brand-mark{
+    width:32px; height:32px; border-radius:9px; background:var(--ink);
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-head); font-weight:800; font-size:14px; flex-shrink:0;
+  }
+  .brand-name{font-family:var(--font-head); font-weight:700; font-size:18px; letter-spacing:-.45px;}
+  .brand-name span{font-family:var(--font-head); font-weight:600; color:var(--g700);}
+  nav.main-nav{display:flex; gap:32px;}
+  .main-nav a{font-weight:600; font-size:13px; letter-spacing:.52px; color:var(--g700);}
+  .main-nav a:hover{color:var(--ink);}
+  .header-right{display:flex; align-items:center; gap:20px;}
+  .avatar-ring{
+    width:32px; height:32px; border-radius:9999px; box-shadow:0 0 0 1px var(--g300);
+    background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:700;
+  }
+  .nav-toggle{display:none; background:none; border:none; width:32px; height:32px; flex-direction:column; justify-content:center; gap:5px;}
+  .nav-toggle span{display:block; height:2px; background:var(--ink); border-radius:2px;}
+  @media (max-width:900px){
+    nav.main-nav{display:none;}
+    .header-inner{padding:0 24px;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; overflow:hidden; background:var(--cream);
+    padding:96px 68px 80px;
+  }
+  .hero-glow{
+    position:absolute; top:-128px; left:28%; right:25%; height:600px;
+    background:rgba(92,158,254,.1); filter:blur(32px); border-radius:9999px;
+  }
+  .hero-grid{
+    position:relative; display:grid; grid-template-columns:7fr 5fr; gap:48px; align-items:center;
+    max-width:1172px; margin:0 auto;
+  }
+  .hero-copy{display:flex; flex-direction:column; gap:20px;}
+  .hero-title{font-size:56px; font-weight:800; letter-spacing:-1.4px; line-height:1.08;}
+  .hero-title .accent{
+    color:var(--blue); position:relative; display:inline-block;
+  }
+  .hero-title .accent svg{position:absolute; left:0; bottom:-8px; width:100%; height:7px;}
+  .hero-quote{font-family:var(--font-head); font-weight:600; font-size:22px; letter-spacing:-.33px; color:var(--g700); max-width:576px;}
+  .hero-desc{font-size:18px; color:var(--g700); letter-spacing:-.18px; line-height:1.62; max-width:576px;}
+  .hero-cta-row{display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding-top:8px;}
+  .trust-badges{display:flex; gap:20px; align-items:center; flex-wrap:wrap; padding-top:8px;}
+  .trust-item{display:flex; gap:6px; align-items:center; font-size:11px; font-weight:600; letter-spacing:.275px; text-transform:uppercase; color:var(--g700);}
+  .trust-item svg{width:14px; height:14px; color:var(--blue);}
+  .trust-sep{color:var(--g300); font-size:11px;}
+
+  /* profile mock card */
+  .profile-col{position:relative;}
+  .ambient-glow{
+    position:absolute; inset:-16px -16px -16.25px -16px; border-radius:24px; filter:blur(20px);
+    background:linear-gradient(47deg, rgba(0,94,181,.2) 0%, rgba(92,158,254,.1) 50%, rgba(92,158,254,0) 100%);
+  }
+  .profile-card{
+    position:relative; background:#fff; border-radius:24px; padding:24px;
+    box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .profile-banner{
+    height:80px; border-radius:16px; background:linear-gradient(90deg,#efeeea,#e3e2df); position:relative; overflow:hidden;
+  }
+  .profile-top{position:relative; padding-bottom:8px;}
+  .profile-avatar-wrap{position:absolute; bottom:-8px; left:16px;}
+  .profile-avatar{
+    width:64px; height:64px; border-radius:9999px; box-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);
+    background:var(--ink); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-head); font-weight:800; font-size:20px; position:relative;
+  }
+  .verified-dot{
+    position:absolute; bottom:0; right:0; width:20px; height:20px; border-radius:9999px; background:var(--blue);
+    display:flex; align-items:center; justify-content:center; color:#fff; border:2px solid #fff;
+  }
+  .verified-dot svg{width:9px; height:9px;}
+  .profile-details{display:flex; flex-direction:column; gap:4px; padding-top:20px;}
+  .profile-name-row{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .profile-name{display:flex; align-items:center; gap:6px;}
+  .profile-name h3{font-size:18px;}
+  .profile-name svg{width:14px; height:14px; color:var(--blue);}
+  .top-voice{background:var(--blue-tint); color:var(--blue-deep); font-size:11px; font-weight:600; letter-spacing:.66px; padding:2px 8px; border-radius:9999px; white-space:nowrap;}
+  .profile-role{font-size:14px; font-weight:500; color:var(--g700); line-height:1.4;}
+  .profile-stats{font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--ink); padding-top:4px;}
+  .profile-stats span{color:var(--g500);}
+  .post-preview{background:var(--alt); border-radius:16px; padding:16px; display:flex; flex-direction:column; gap:12px;}
+  .post-preview-head{display:flex; align-items:center; justify-content:space-between;}
+  .post-preview-head-left{display:flex; align-items:center; gap:8px;}
+  .li-badge{width:24px; height:24px; border-radius:9999px; background:var(--black); color:#fff; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;}
+  .post-meta{font-size:11px; font-weight:600; letter-spacing:.66px;}
+  .post-meta.muted{color:var(--g500);}
+  .post-text{font-size:14px; color:var(--ink); line-height:1.4;}
+  .post-stats{display:flex; align-items:center; justify-content:space-between; padding-top:8px; font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--g700);}
+  .post-stats > div{display:flex; align-items:center; gap:4px;}
+  .post-stats svg{width:12px; height:12px;}
+  .client-row{display:flex; align-items:center; justify-content:space-between; padding-top:4px;}
+  .avatar-stack{display:flex; align-items:center;}
+  .avatar-stack .mini-avatar{
+    width:28px; height:28px; border-radius:9999px; display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:600; color:#fff; margin-right:-8px; border:2px solid #fff;
+  }
+  .featured-text{font-size:11px; font-weight:500; letter-spacing:.66px; color:var(--g700);}
+
+  .float-metric{
+    position:absolute; display:flex; align-items:center; gap:12px; padding:14px;
+    background:rgba(255,255,255,.9); backdrop-filter:blur(6px); border-radius:16px;
+    box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);
+  }
+  .float-metric--top{top:-16px; right:-16px;}
+  .float-metric--bottom{bottom:-20px; left:-20px;}
+  .float-metric-icon{width:36px; height:36px; border-radius:12px; background:rgba(214,227,255,.5); display:flex; align-items:center; justify-content:center;}
+  .float-metric-icon svg{width:16px; height:16px; color:var(--blue);}
+  .float-metric-num{font-family:var(--font-head); font-weight:700; font-size:18px; letter-spacing:-.18px;}
+  .float-metric-label{font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--g500);}
+
+  @media (max-width:900px){
+    .hero{padding:64px 24px;}
+    .hero-grid{grid-template-columns:1fr; gap:56px;}
+    .hero-title{font-size:40px;}
+    .hero-quote, .hero-desc{max-width:100%;}
+    .profile-col{max-width:420px; margin:0 auto;}
+  }
+  @media (max-width:560px){
+    .hero-title{font-size:32px;}
+  }
+
+  /* ===== SECTION shells ===== */
+  .section{padding:96px 20px;}
+  .section--tight{padding:96px 68px;}
+  @media (max-width:900px){
+    .section{padding:64px 20px;}
+    .section--tight{padding:64px 24px;}
+  }
+  .section-header{max-width:672px; margin:0 auto 56px; text-align:center; display:flex; flex-direction:column; gap:8px;}
+
+  /* ===== SECTION 2: value cards ===== */
+  .section-alt{background:var(--alt);}
+  .cards-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1144px; margin:0 auto;}
+  .value-card{
+    background:#fff; border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:16px;
+    box-shadow:0 1px 1px var(--card-line);
+  }
+  .value-card p{font-size:14px; color:var(--g700); letter-spacing:-.08px; line-height:1.63;}
+  .bottom-statement{
+    max-width:1144px; margin:56px auto 0; background:#fff; border-radius:16px; padding:32px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+    box-shadow:0 1px 1px var(--card-line);
+  }
+  .bottom-statement-left{display:flex; gap:16px; align-items:center;}
+  .bottom-statement-icon{width:40px; height:40px; border-radius:9999px; background:var(--blue-tint); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .bottom-statement-icon svg{width:15px; height:15px; color:var(--blue);}
+  .bottom-statement small{display:block; font-size:11px; font-weight:600; letter-spacing:.55px; text-transform:uppercase; color:var(--g500); margin-bottom:3px;}
+  .bottom-statement h3{font-size:22px; letter-spacing:-.33px;}
+  @media (max-width:900px){ .cards-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .cards-grid{grid-template-columns:1fr;} }
+
+  /* ===== SECTION 3: lead form ===== */
+  .lead-grid{display:grid; grid-template-columns:6fr 6fr; gap:56px; max-width:1144px; margin:0 auto; align-items:center;}
+  .lead-copy{display:flex; flex-direction:column; gap:20px;}
+  .lead-copy .price-line{font-family:var(--font-head); font-weight:800; font-size:32px; letter-spacing:-.64px; color:var(--blue);}
+  .checklist{display:flex; flex-direction:column; gap:12px; padding-top:8px;}
+  .checklist-item{display:flex; align-items:center; gap:12px; font-size:16px; font-weight:500; letter-spacing:-.08px;}
+  .checklist-item .tick{width:24px; height:24px; border-radius:9999px; background:var(--blue-tint); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .checklist-item .tick svg{width:11px; height:11px; color:var(--blue-deep);}
+  .form-card{
+    background:#fff; border-radius:24px; padding:40px;
+    box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field label{font-size:13px; font-weight:600; letter-spacing:.52px;}
+  .field input{
+    background:var(--alt); border:1px solid transparent; border-radius:12px; padding:15px 16px;
+    font-size:16px; letter-spacing:-.08px; color:var(--ink); font-family:inherit; width:100%;
+  }
+  .field input::placeholder{color:var(--g500);}
+  .field input:focus{outline:none; border-color:var(--blue); background:#fff;}
+  .form-submit{width:100%; margin-top:8px; display:flex; gap:8px; align-items:center; justify-content:center; padding:16px;}
+  .form-note{font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--g500); text-align:center; padding-top:4px; line-height:1.45;}
+  .form-status{font-size:13px; font-weight:600; text-align:center; min-height:18px;}
+  .form-status.ok{color:var(--blue);}
+  .form-status.err{color:#c0392b;}
+  @media (max-width:900px){
+    .lead-grid{grid-template-columns:1fr;}
+    .form-card{padding:28px;}
+  }
+
+  /* ===== SECTION 4: dark audit spotlight ===== */
+  .audit-section{
+    position:relative; overflow:hidden; background:var(--black); color:#fff; padding:112px 68px;
+  }
+  .audit-glow{
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at center top, rgba(92,158,254,.18), transparent 70%);
+  }
+  .audit-grid{position:relative; display:grid; grid-template-columns:6fr 6fr; gap:56px; align-items:center; max-width:1144px; margin:0 auto;}
+  .audit-copy{display:flex; flex-direction:column; gap:20px;}
+  .audit-copy h2{color:#fff;}
+  .audit-price{font-family:var(--font-head); font-weight:600; font-size:32px; color:var(--dark-grey); letter-spacing:-.64px; display:flex; align-items:baseline; gap:6px; flex-wrap:wrap;}
+  .audit-price .num{font-family:var(--font-head); font-weight:800; font-size:60px; color:var(--dark-blue-accent); filter:drop-shadow(0 0 6px rgba(92,158,254,.4));}
+  .audit-desc{color:var(--dark-grey); font-size:16px; letter-spacing:-.08px; line-height:1.62;}
+  .audit-checklist{display:grid; grid-template-columns:1fr 1fr; gap:12px; padding-top:8px;}
+  .audit-checklist .item{display:flex; align-items:center; gap:10px; font-size:14px; color:#fff;}
+  .audit-checklist svg{width:15px; height:15px; color:var(--dark-blue-accent); flex-shrink:0;}
+  .audit-cta-row{display:flex; align-items:center; gap:16px; flex-wrap:wrap; padding-top:16px;}
+  .audit-reassure{font-size:11px; font-weight:600; font-style:italic; letter-spacing:.66px; color:var(--dark-grey);}
+
+  .scanner{
+    position:relative; background:rgba(227,226,223,.05); backdrop-filter:blur(6px);
+    border-radius:24px; padding:32px; display:flex; flex-direction:column; gap:24px;
+    box-shadow:0 25px 50px -12px rgba(0,0,0,.25);
+  }
+  .pipeline{display:flex; align-items:center; justify-content:space-between; gap:6px; overflow-x:auto; font-size:11px; font-weight:600; letter-spacing:.55px; text-transform:uppercase; color:var(--dark-blue-accent); padding-bottom:8px;}
+  .pipeline span.final{color:#fff; font-weight:700;}
+  .scorecard-grid{display:flex; gap:16px;}
+  .scorecard{background:rgba(227,226,223,.1); border-radius:16px; padding:16px; flex:1; display:flex; flex-direction:column; gap:8px;}
+  .scorecard-label{font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--dark-grey);}
+  .scorecard-value{display:flex; align-items:baseline; justify-content:space-between;}
+  .scorecard-value .big{font-family:var(--font-head); font-weight:700; font-size:32px; color:#fff;}
+  .scorecard-value .tag{font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--dark-blue-accent);}
+  .scorecard-value .of100{font-family:var(--font-head); font-weight:600; font-size:14px; color:var(--dark-grey);}
+  .bar{background:rgba(227,226,223,.2); border-radius:9999px; height:6px; overflow:hidden;}
+  .bar > span{display:block; height:100%; background:var(--dark-blue-accent); border-radius:9999px;}
+  .diag-preview{background:rgba(227,226,223,.1); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:11px;}
+  .diag-preview-head{display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;}
+  .diag-preview-head b{font-size:11px; font-weight:600; letter-spacing:.275px; text-transform:uppercase; color:#fff;}
+  .live-pill{display:flex; align-items:center; gap:6px; background:rgba(92,158,254,.2); padding:2px 8px; border-radius:9999px; font-size:11px; color:var(--dark-blue-accent);}
+  .live-pill .dot{width:6px; height:6px;}
+  .diag-preview p{font-size:14px; color:var(--dark-grey); line-height:1.63; letter-spacing:-.08px;}
+  .diag-status{display:flex; align-items:center; justify-content:space-between; padding-top:4px; flex-wrap:wrap; gap:8px;}
+  .diag-status-left{display:flex; align-items:center; gap:8px; font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--dark-grey);}
+  .diag-status-left svg{width:14px; height:14px; color:var(--dark-blue-accent);}
+  .diag-status-right{font-size:11px; font-weight:700; letter-spacing:.66px; color:var(--dark-blue-accent);}
+  @media (max-width:900px){
+    .audit-section{padding:64px 24px;}
+    .audit-grid{grid-template-columns:1fr;}
+    .audit-checklist{grid-template-columns:1fr;}
+  }
+
+  /* ===== SECTION 5: testimonials ===== */
+  .reviews-grid{display:flex; gap:20px; max-width:1144px; margin:0 auto; flex-wrap:wrap;}
+  .review-card{
+    flex:1 1 300px; background:#fff; border-radius:16px; padding:28px;
+    box-shadow:0 1px 1px var(--card-line); display:flex; flex-direction:column; justify-content:space-between; gap:16px;
+  }
+  .review-stars{display:flex; gap:2px; color:#f5b400;}
+  .review-stars svg{width:16px; height:16px;}
+  .review-quote{font-size:16px; letter-spacing:-.08px; line-height:1.63;}
+  .review-foot{display:flex; align-items:center; justify-content:space-between; padding-top:16px; gap:12px;}
+  .review-person{display:flex; gap:12px; align-items:center;}
+  .review-avatar{width:40px; height:40px; border-radius:9999px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:14px; font-weight:700; flex-shrink:0;}
+  .review-name{font-family:var(--font-head); font-weight:700; font-size:18px; letter-spacing:-.18px;}
+  .review-role{font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--g500);}
+  .li-mini{width:24px; height:24px; border-radius:4px; background:#0a66c2; color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;}
+
+  .transform-callout{
+    max-width:1144px; margin:56px auto 0; background:var(--alt); border-radius:24px; padding:40px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .transform-callout h3{font-size:22px; letter-spacing:-.33px;}
+  .transform-callout p{font-size:16px; color:var(--g700); padding-top:2px;}
+
+  /* ===== SECTION 6: FAQ ===== */
+  .faq-wrap{max-width:840px; margin:0 auto; display:flex; flex-direction:column; gap:32px;}
+  .faq-list{display:flex; flex-direction:column; gap:12px;}
+  .faq-item{background:#fff; border-radius:16px; box-shadow:0 1px 1px var(--card-line); overflow:hidden;}
+  .faq-item summary{
+    list-style:none; cursor:pointer; padding:20px; display:flex; align-items:center; justify-content:space-between;
+    font-family:var(--font-head); font-weight:600; font-size:18px; letter-spacing:-.18px; gap:16px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary svg{width:12px; height:12px; flex-shrink:0; transition:transform .2s ease; color:var(--g700);}
+  .faq-item[open] summary svg{transform:rotate(180deg);}
+  .faq-answer{padding:0 20px 20px; font-size:15px; color:var(--g700); line-height:1.6;}
+
+  /* ===== SECTION 7: final CTA ===== */
+  .final-cta-wrap{padding:96px 68px;}
+  @media (max-width:900px){ .final-cta-wrap{padding:64px 24px;} }
+  .final-cta{
+    position:relative; overflow:hidden; background:var(--black); color:#fff; border-radius:24px;
+    padding:80px 40px; display:flex; flex-direction:column; align-items:center; gap:24px; text-align:center;
+    box-shadow:0 25px 50px -12px rgba(0,0,0,.25);
+  }
+  .final-cta-glow{position:absolute; inset:0; background:radial-gradient(circle at center, rgba(0,94,181,.22), transparent 70%);}
+  .final-cta-watermark{
+    position:absolute; bottom:-64px; right:-48px; font-family:var(--font-head); font-weight:800;
+    font-size:220px; color:rgba(227,226,223,.05); line-height:1; pointer-events:none;
+  }
+  .final-cta h2{color:#fff; position:relative;}
+  .final-cta p{color:var(--dark-grey); font-size:18px; max-width:512px; position:relative;}
+  .final-cta-tag{font-size:11px; font-weight:500; letter-spacing:.55px; text-transform:uppercase; color:var(--g300); position:relative;}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--alt);}
+  .footer-inner{max-width:1240px; margin:0 auto; padding:56px 48px;}
+  .footer-grid{display:grid; grid-template-columns:6fr 3fr 3fr; gap:32px;}
+  .footer-brand p{font-size:16px; color:var(--g700); line-height:1.6; padding-top:12px; max-width:448px;}
+  .footer-col-title{font-size:11px; font-weight:600; letter-spacing:.55px; text-transform:uppercase; color:var(--g500); margin-bottom:8px;}
+  .footer-links{display:flex; flex-direction:column; gap:8px;}
+  .footer-links a{font-size:14px; color:var(--g700);}
+  .footer-links a:hover{color:var(--ink);}
+  .footer-bottom{display:flex; align-items:center; justify-content:space-between; padding-top:20px; margin-top:32px; border-top:1px solid rgba(0,0,0,.06); flex-wrap:wrap; gap:12px;}
+  .footer-bottom span, .footer-bottom a{font-size:11px; font-weight:600; letter-spacing:.66px; color:var(--g500);}
+  .footer-legal{display:flex; gap:20px;}
+  @media (max-width:900px){
+    .footer-grid{grid-template-columns:1fr; gap:28px;}
+    .footer-inner{padding:48px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">A</span>
+      <span class="brand-name">ARAVIND <span>— LinkedIn Growth</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="#services">Services</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#results">Results</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-right">
+      <a class="btn btn-dark btn-sm" href="#audit">Get My LinkedIn Audit</a>
+      <span class="avatar-ring">AR</span>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- SECTION 1 — HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="badge-pill"><span class="dot"></span> LinkedIn Personal Branding</span>
+        <h1 class="hero-title">Turn Your LinkedIn Into
+          <span class="accent">Your Personal Brand.
+            <svg viewBox="0 0 300 10" preserveAspectRatio="none"><path d="M2 6 Q 75 -2 150 6 T 298 6" stroke="#005eb5" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+          </span>
+        </h1>
+        <p class="hero-quote">&ldquo;From &lsquo;I should post more&rsquo; to &lsquo;People know me for this.&rsquo;&rdquo;</p>
+        <p class="hero-desc">I help founders, creators, consultants, and professionals build a LinkedIn presence that gets noticed — through strategy, scroll-stopping content, and consistent management.</p>
+        <div class="hero-cta-row">
+          <a class="btn btn-primary" href="#discovery">Let&rsquo;s Grow Your LinkedIn →</a>
+          <a class="btn btn-ghost" href="#how-it-works">See how it works ↓</a>
+        </div>
+        <div class="trust-badges">
+          <span class="trust-item"><svg viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"/></svg>Strategy</span>
+          <span class="trust-sep">•</span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"/></svg>Scripting</span>
+          <span class="trust-sep">•</span>
+          <span class="trust-item"><svg viewBox="0 0 24 24" class="icon"><polyline points="20 6 9 17 4 12"/></svg>Management</span>
+        </div>
+      </div>
+
+      <div class="profile-col">
+        <div class="ambient-glow"></div>
+        <div class="profile-card">
+          <div class="profile-top">
+            <div class="profile-banner"></div>
+            <div class="profile-avatar-wrap">
+              <div class="profile-avatar">AR
+                <span class="verified-dot"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-details">
+            <div class="profile-name-row">
+              <div class="profile-name">
+                <h3>Aravind Ramanathan</h3>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 15 6 20 7 17 11 18 16 12 14 6 16 7 11 4 7 9 6Z"/></svg>
+              </div>
+              <span class="top-voice">Top Voice</span>
+            </div>
+            <p class="profile-role">LinkedIn Growth Strategist &amp; Executive Ghostwriter | Helping Founders Scale Inbound Pipelines</p>
+            <p class="profile-stats">38,400+<span> followers • 500+ connections</span></p>
+          </div>
+          <div class="post-preview">
+            <div class="post-preview-head">
+              <div class="post-preview-head-left">
+                <span class="li-badge">in</span>
+                <span class="post-meta">Pinned Case Breakdown</span>
+              </div>
+              <span class="post-meta muted">Yesterday</span>
+            </div>
+            <p class="post-text">&ldquo;The difference between an active profile and an inbound magnet isn&rsquo;t algorithm hacks. It&rsquo;s high-conviction editorial clarity.&rdquo;</p>
+            <div class="post-stats">
+              <div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3C21 5 23.5 8.5 21.5 12.5 19 16.65 12 21 12 21z"/></svg> 1,480</div>
+              <div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v12H7l-3 3z"/></svg> 284 comments</div>
+              <div><svg viewBox="0 0 24 24" class="icon"><polyline points="17 2 21 6 17 10"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 22 3 18 7 14"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg> 92 reposts</div>
+            </div>
+          </div>
+          <div class="client-row">
+            <div class="avatar-stack">
+              <span class="mini-avatar" style="background:#000">AR</span>
+              <span class="mini-avatar" style="background:#005eb5">MK</span>
+              <span class="mini-avatar" style="background:#2f312e">SL</span>
+              <span class="mini-avatar" style="background:#e3e2df; color:#444748; margin-right:0;">+50</span>
+            </div>
+            <span class="featured-text">Featured by 50+ executives</span>
+          </div>
+        </div>
+
+        <div class="float-metric float-metric--top">
+          <div class="float-metric-icon"><svg viewBox="0 0 24 24" class="icon"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div><div class="float-metric-num">+2.4K</div><div class="float-metric-label">followers / mo</div></div>
+        </div>
+        <div class="float-metric float-metric--bottom">
+          <div class="float-metric-icon"><svg viewBox="0 0 24 24" class="icon"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          <div><div class="float-metric-num">127K</div><div class="float-metric-label">monthly impressions</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — ACHIEVEMENT / VALUE -->
+  <section class="section section-alt" id="services">
+    <div class="section-header">
+      <p class="eyebrow center">The Transformation</p>
+      <h2 class="center">Your LinkedIn Should Be Working Even When You&rsquo;re Not.</h2>
+      <p class="section-lede center">You don&rsquo;t need to post every day just for the sake of posting. You need the right strategy, the right stories, and the right positioning.</p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="value-card">
+        <div class="icon-box"><svg viewBox="0 0 24 24" class="icon" style="color:#1b1c1a"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg></div>
+        <h3>Personal Brand Strategy</h3>
+        <p>Build a clear positioning that makes people understand what you&rsquo;re known for within seconds of landing on your profile.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon-box"><svg viewBox="0 0 24 24" class="icon" style="color:#1b1c1a"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M13 3v6h6"/></svg></div>
+        <h3>Content Strategy</h3>
+        <p>Know what to post, who you&rsquo;re speaking to, and why it matters — replacing aimless updates with high-intent narratives.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon-box"><svg viewBox="0 0 24 24" class="icon" style="color:#1b1c1a"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+        <h3>Post Ideation &amp; Scripting</h3>
+        <p>Turn your expertise and experiences into content people actually want to read, bookmark, and quote in boardrooms.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon-box"><svg viewBox="0 0 24 24" class="icon" style="color:#1b1c1a"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <h3>Profile Positioning</h3>
+        <p>Make your profile communicate your value before someone even sends you a message, turning passive lurkers into warm inquiries.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon-box"><svg viewBox="0 0 24 24" class="icon" style="color:#1b1c1a"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h3>Content Management</h3>
+        <p>Stay consistent without spending hours every week figuring out what to post. Hands-off scheduling and publishing workflows.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon-box"><svg viewBox="0 0 24 24" class="icon" style="color:#1b1c1a"><path d="M12 2 3 7l9 5 9-5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></div>
+        <h3>Authority Building</h3>
+        <p>Build a presence that creates familiarity, credibility, and meaningful conversations with the right decision-makers.</p>
+      </div>
+    </div>
+
+    <div class="bottom-statement">
+      <div class="bottom-statement-left">
+        <div class="bottom-statement-icon"><svg viewBox="0 0 24 24" class="icon"><path d="M13 2 3 14h7l-1 8 11-14h-7Z"/></svg></div>
+        <div>
+          <small>Editorial Pillar</small>
+          <h3>From 0 to Hero — One Post at a Time.</h3>
+        </div>
+      </div>
+      <a class="btn btn-dark" href="#discovery">Book Brand Session</a>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — LEAD FORM / DISCOVERY -->
+  <section class="section section--tight" id="discovery">
+    <div class="lead-grid">
+      <div class="lead-copy" id="how-it-works">
+        <p class="eyebrow">Get In Touch</p>
+        <h2>Think Your LinkedIn Has More Potential?</h2>
+        <p class="price-line">Let&rsquo;s find out.</p>
+        <p class="section-lede">Tell me a little about yourself, your goals, and where you are with LinkedIn right now. I&rsquo;ll take a look at your current presence and help you understand what&rsquo;s working, what&rsquo;s missing, and what you can do next.</p>
+        <div class="checklist">
+          <div class="checklist-item"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Identify your biggest LinkedIn gaps</div>
+          <div class="checklist-item"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Get clear content direction</div>
+          <div class="checklist-item"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>Know your next steps</div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form id="lead-form">
+          <div class="field">
+            <label for="lf-name">Your Name</label>
+            <input type="text" id="lf-name" name="name" placeholder="Alex Morgan" required>
+          </div>
+          <div class="field" style="margin-top:20px;">
+            <label for="lf-email">Work Email</label>
+            <input type="email" id="lf-email" name="email" placeholder="alex@company.com" required>
+          </div>
+          <div class="field" style="margin-top:20px;">
+            <label for="lf-phone">Phone Number</label>
+            <input type="tel" id="lf-phone" name="phone" placeholder="+91 98765 43210" required>
+          </div>
+          <div class="form-submit" style="margin-top:8px;">
+            <button class="btn btn-primary" type="submit" style="width:100%;" id="lf-submit">
+              <span id="lf-submit-text">Get My LinkedIn Reviewed</span> <span>→</span>
+            </button>
+          </div>
+          <p class="form-status" id="lf-status"></p>
+          <p class="form-note">No complicated forms. No unnecessary sales pitch. Just a clear direction for your LinkedIn.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — ₹1 LINKEDIN AUDIT -->
+  <section class="audit-section" id="audit">
+    <div class="audit-glow"></div>
+    <div class="audit-grid">
+      <div class="audit-copy">
+        <span class="badge-pill badge-pill--dark"><span class="dot dot--accent"></span> The ₹1 LinkedIn Audit</span>
+        <h2>Not Sure What&rsquo;s Wrong With Your LinkedIn?</h2>
+        <p class="audit-price">Let&rsquo;s find out for just <span class="num">₹1</span>.</p>
+        <p class="audit-desc">I&rsquo;ll take a closer look at your LinkedIn presence and point out the exact gaps that may be holding your personal brand back.</p>
+        <div class="audit-checklist">
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Profile positioning check</div>
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Content review</div>
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Personal branding feedback</div>
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Visibility opportunities</div>
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Content direction</div>
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Actionable suggestions</div>
+        </div>
+        <div class="audit-cta-row">
+          <a class="btn btn-accent" href="https://payments.cashfree.com/forms/getaudit" target="_blank" rel="noopener">Get My ₹1 Audit →</a>
+          <span class="audit-reassure">₹1 today. Clarity for your LinkedIn tomorrow.</span>
+        </div>
+      </div>
+
+      <div class="scanner" id="results">
+        <div class="pipeline">
+          <span>Profile</span><span>→</span><span>Positioning</span><span>→</span><span>Content</span><span>→</span><span>Visibility</span><span>→</span><span class="final">Action Plan</span>
+        </div>
+        <div class="scorecard-grid">
+          <div class="scorecard">
+            <div class="scorecard-label">Hook Score</div>
+            <div class="scorecard-value"><span class="big">94%</span><span class="tag">High</span></div>
+            <div class="bar"><span style="width:94%"></span></div>
+          </div>
+          <div class="scorecard">
+            <div class="scorecard-label">Authority Index</div>
+            <div class="scorecard-value"><span class="big">92<span class="of100">/100</span></span><span class="tag">Top 5%</span></div>
+            <div class="bar"><span style="width:92%"></span></div>
+          </div>
+        </div>
+        <div class="diag-preview">
+          <div class="diag-preview-head">
+            <b>Diagnostic Report Preview</b>
+            <span class="live-pill"><span class="dot dot--accent"></span> Live Diagnostic</span>
+          </div>
+          <p>Headline clarity: Strong narrative anchor identified. About section currently underutilizing social proof metrics. Content cadence needs 3x narrative realignment to trigger inbound executive messages.</p>
+        </div>
+        <div class="diag-status">
+          <div class="diag-status-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Audited personally by Aravind</div>
+          <div class="diag-status-right">24-hr turnaround</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 — TESTIMONIALS -->
+  <section class="section" id="reviews">
+    <div class="section-header">
+      <p class="eyebrow center">Client Stories</p>
+      <h2 class="center">Don&rsquo;t Just Take My Word For It.</h2>
+      <p class="section-lede center">Here&rsquo;s what people say after working together.</p>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote" style="margin-top:16px;">&ldquo;I finally understood what I should be posting and, more importantly, why I should be posting it. My LinkedIn feels like an actual personal brand now.&rdquo;</p>
+        </div>
+        <div class="review-foot">
+          <div class="review-person">
+            <span class="review-avatar" style="background:#000">MV</span>
+            <div><div class="review-name">Marcus Vance</div><div class="review-role">SaaS Founder (Ex-Stripe)</div></div>
+          </div>
+          <span class="li-mini">in</span>
+        </div>
+      </div>
+      <div class="review-card">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote" style="margin-top:16px;">&ldquo;Before working together, I was constantly stuck on what to write. Now I have a clear content direction and a system I can actually follow.&rdquo;</p>
+        </div>
+        <div class="review-foot">
+          <div class="review-person">
+            <span class="review-avatar" style="background:#005eb5">SL</span>
+            <div><div class="review-name">Sarah Lin</div><div class="review-role">Management Consultant</div></div>
+          </div>
+          <span class="li-mini">in</span>
+        </div>
+      </div>
+      <div class="review-card">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote" style="margin-top:16px;">&ldquo;The biggest difference was consistency. I stopped overthinking every post and started showing up with confidence.&rdquo;</p>
+        </div>
+        <div class="review-foot">
+          <div class="review-person">
+            <span class="review-avatar" style="background:#e3e2df; color:#1b1c1a;">DC</span>
+            <div><div class="review-name">David Chen</div><div class="review-role">AI Product Creator</div></div>
+          </div>
+          <span class="li-mini">in</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="transform-callout">
+      <div>
+        <h3>Your expertise deserves to be seen.</h3>
+        <p>Let&rsquo;s make sure the right people see it and remember it.</p>
+      </div>
+      <a class="btn btn-primary" href="#discovery">Start Growing My LinkedIn →</a>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — FAQ -->
+  <section class="section section-alt" id="faq">
+    <div class="faq-wrap">
+      <div class="section-header" style="margin-bottom:0;">
+        <p class="eyebrow center">Clarity First</p>
+        <h2 class="center">Frequently Asked Questions</h2>
+        <p class="section-lede center">Everything you probably wanted to know before getting started.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Do I need to be active on LinkedIn already? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="faq-answer">Not at all. Whether you&rsquo;re starting from zero or already posting inconsistently, we build a strategy and system that fits where you are right now.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Do you write the posts for me? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="faq-answer">I turn your ideas, expertise, and experiences into scripted, publish-ready posts — so you always sound like you, just sharper.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Do you manage my LinkedIn too? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="faq-answer">Yes — from scheduling and publishing to tracking what&rsquo;s working, content management is part of the ongoing engagement.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How often will I need to provide content ideas? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="faq-answer">A short monthly conversation is usually enough. I mine your experiences, wins, and opinions to keep the content pipeline full.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What kind of people do you work with? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="faq-answer">Founders, creators, consultants, and professionals who have real expertise but no time or system to consistently show it on LinkedIn.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How long does it take to see results? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="faq-answer">Most clients notice sharper positioning and engagement within the first month, with compounding visibility over 60&ndash;90 days.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can you work with my existing LinkedIn profile? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="faq-answer">Absolutely. We audit what&rsquo;s already there, keep what&rsquo;s working, and rebuild the positioning and content around it.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Why should I invest in LinkedIn? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></summary>
+          <div class="faq-answer">It&rsquo;s where decision-makers, clients, and opportunities already are. A strong presence turns LinkedIn into a passive inbound channel.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 — FINAL CTA -->
+  <section class="final-cta-wrap">
+    <div class="final-cta">
+      <div class="final-cta-glow"></div>
+      <div class="final-cta-watermark">in</div>
+      <p class="eyebrow eyebrow--dark center">Take The Stage</p>
+      <h2 class="center">Your Expertise. Your Story. Your Brand.</h2>
+      <p class="center">You already have something valuable to say. Now let&rsquo;s make sure people hear it.</p>
+      <a class="btn btn-white" href="#discovery">Start Your LinkedIn Journey →</a>
+      <span class="final-cta-tag">Strategize • Script • Manage • Grow</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-mark" style="background:#000;">A</span>
+          <span class="brand-name" style="color:#000;">ARAVIND</span>
+        </div>
+        <p>Helping professionals turn their expertise into a LinkedIn presence people remember.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="#services">Services</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#reviews">Case Studies &amp; Results</a>
+          <a href="#reviews">Executive Endorsements</a>
+          <a href="#faq">Frequently Asked Questions</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Connect &amp; Advisory</div>
+        <div class="footer-links">
+          <a href="#" target="_blank" rel="noopener">LinkedIn /in/aravind-growth</a>
+          <a href="#" target="_blank" rel="noopener">Instagram @aravind.signals</a>
+          <a href="mailto:advisory@aravindgrowth.com">advisory@aravindgrowth.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Aravind LinkedIn Growth Advisory. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Advisory</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwXF_gZ7JLUlb6w3SuOeOvpnLqvrpBBcCPYpEMbtYzEd6u6giFMUpXso3OEd8RvqY-f/exec";
+
+  var form = document.getElementById('lead-form');
+  var statusEl = document.getElementById('lf-status');
+  var submitBtn = document.getElementById('lf-submit');
+  var submitText = document.getElementById('lf-submit-text');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var formData = new FormData();
+    formData.append('name', document.getElementById('lf-name').value.trim());
+    formData.append('email', document.getElementById('lf-email').value.trim());
+    formData.append('phone', document.getElementById('lf-phone').value.trim());
+
+    submitBtn.disabled = true;
+    submitText.textContent = 'Sending…';
+    statusEl.textContent = '';
+    statusEl.className = 'form-status';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: formData
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data && data.success) {
+          statusEl.textContent = "Thanks! I'll be in touch shortly.";
+          statusEl.className = 'form-status ok';
+          form.reset();
+        } else {
+          statusEl.textContent = 'Something went wrong. Please try again.';
+          statusEl.className = 'form-status err';
+        }
+      })
+      .catch(function () {
+        statusEl.textContent = 'Something went wrong. Please try again.';
+        statusEl.className = 'form-status err';
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitText.textContent = 'Get My LinkedIn Reviewed';
+      });
+  });
+</script>
+
+</body>
+</html>
